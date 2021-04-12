@@ -17,7 +17,7 @@ var functions = {
                     res.json({ success: false, msg: 'Failed to save' })
 
                 } else {
-                    res.json({ success: true, msg: 'Succesfully saved' })
+                    res.json({ success: true, msg: newUser._id })
                 }
             })
 
