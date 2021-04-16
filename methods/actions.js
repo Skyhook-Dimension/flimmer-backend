@@ -85,6 +85,22 @@ var functions = {
                 }
             })
         }
+    },
+
+    fetchFlims: function(req, res) {
+        if (!req.body.userId) {
+            res.json({ success: false, msg: 'Enter all fields' })
+        } else {
+            Flim.find({ userId: req.body.userId }).toArray(function(err, result) {
+                if (err) {
+                    res.json({ msg: 'Failed to fetch' })
+
+                } else {
+                    res.json({ flimBody: result.flimBody })
+                }
+
+            })
+        }
     }
 }
 

@@ -13,5 +13,6 @@ router.post('/adduser', actions.addNew)
 router.post('/addflim', actions.addFlim)
 router.post('/authenticate', actions.authenticate)
 router.get('/getinfo', actions.getinfo)
+router.get('/fetchflims', actions.fetchFlims)
 
 module.exports = router
