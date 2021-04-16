@@ -2,6 +2,7 @@ var User = require('../models/user')
 var Flim = require('../models/flim')
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
+var mongoose = require('mongoose')
 
 var functions = {
     addNew: function(req, res) {
@@ -51,6 +52,8 @@ var functions = {
 
     getinfo: function(req, res) {
         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+
+            console.log(req.headers.authorization)
             var token = req.headers.authorization.split(' ')[1]
             var decodedtoken = jwt.decode(token, config.secret)
             return res.json({ success: true, msg: decodedtoken.name })
@@ -88,20 +91,26 @@ var functions = {
     },
 
     fetchFlims: function(req, res) {
-        if (!req.param('userId')) {
-            res.json({ success: false, msg: 'Enter all fields' })
-        } else {
-            Flim.find({ userId: req.param('userId') }).toArray(function(err, result) {
-                if (err) {
-                    res.json({ msg: 'Failed to fetch' })
 
-                } else {
-                    res.json({ flimBody: result.flimBody })
-                }
+            if (!req.headers.userid) {
+                res.json({ success: false, msg: 'Enter userId' })
+            } else {
+                Flim.find({ userId: req.headers.userid }, function(err, flims) {
+                        if (err)
+                            throw err
 
-            })
+                        if (!flims) {
+                            res.json({ success: false, msg: 'No flims found for the user' })
+                        } else {
+                            //console.log(flims)
+                            res.json({ success: true, msg: flims })
+                        }
+                    })
+                    //res.json({ success: true, msg: req.headers.userid })
+            }
         }
-    }
+        // }
 }
+
 
 module.exports = functions
