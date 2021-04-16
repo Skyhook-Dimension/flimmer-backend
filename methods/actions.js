@@ -53,7 +53,7 @@ var functions = {
         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
             var token = req.headers.authorization.split(' ')[1]
             var decodedtoken = jwt.decode(token, config.secret)
-            return res.json({ success: true, msg: decodedtoken.name})
+            return res.json({ success: true, msg: decodedtoken.name })
         } else {
             return res.json({ success: false, msg: `No Headers` })
 
@@ -62,27 +62,29 @@ var functions = {
     },
 
     addFlim: function(req, res) {
-        if ((!req.body.userId) || (!req.body.flimBody)) {
-            res.json({ success: false, msg: 'Enter all fields' })
-        } else {
-            var newFlim = Flim({
-                userId: req.body.userId,
-                flimBody: req.body.flimBody,
-                movieTitle: req.body.movieTitle,
-                moviePoster: req.body.moviePoster,
-                movieYear: req.body.movieYear,
-                movieId: req.body.movieId,
+        res.json({ success: true, msg: 'newFlim._id' })
 
-            })
-            newFlim.save(function(err, newFlim) {
-                if (err) {
-                    res.json({ success: false, msg: 'Failed to save' })
+        // if ((!req.body.userId) || (!req.body.flimBody)) {
+        //     res.json({ success: false, msg: 'Enter all fields' })
+        // } else {
+        //     var newFlim = Flim({
+        //         userId: req.body.userId,
+        //         flimBody: req.body.flimBody,
+        //         movieTitle: req.body.movieTitle,
+        //         moviePoster: req.body.moviePoster,
+        //         movieYear: req.body.movieYear,
+        //         movieId: req.body.movieId,
 
-                } else {
-                    res.json({ success: true, msg: newFlim._id })
-                }
-            })
-        }
+        //     })
+        //     newFlim.save(function(err, newFlim) {
+        //         if (err) {
+        //             res.json({ success: false, msg: 'Failed to save' })
+
+        //         } else {
+        //             res.json({ success: true, msg: newFlim._id })
+        //         }
+        //     })
+        // }
     }
 }
 
