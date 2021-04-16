@@ -10,6 +10,8 @@ router.get('/dashboard', (req, res) => {
 })
 
 router.post('/adduser', actions.addNew)
+router.post('/addflim', actions.addFlim)
 router.post('/authenticate', actions.authenticate)
 router.get('/getinfo', actions.getinfo)
+
 module.exports = router
