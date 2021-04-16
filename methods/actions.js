@@ -62,29 +62,29 @@ var functions = {
     },
 
     addFlim: function(req, res) {
-        res.json({ success: true, msg: 'newFlim._id' })
+        //res.json({ success: true, msg: 'newFlim._id' })
 
-        // if ((!req.body.userId) || (!req.body.flimBody)) {
-        //     res.json({ success: false, msg: 'Enter all fields' })
-        // } else {
-        //     var newFlim = Flim({
-        //         userId: req.body.userId,
-        //         flimBody: req.body.flimBody,
-        //         movieTitle: req.body.movieTitle,
-        //         moviePoster: req.body.moviePoster,
-        //         movieYear: req.body.movieYear,
-        //         movieId: req.body.movieId,
+        if ((!req.body.userId) || (!req.body.flimBody)) {
+            res.json({ success: false, msg: 'Enter all fields' })
+        } else {
+            var newFlim = Flim({
+                userId: req.body.userId,
+                flimBody: req.body.flimBody,
+                movieTitle: req.body.movieTitle,
+                moviePoster: req.body.moviePoster,
+                movieYear: req.body.movieYear,
+                movieId: req.body.movieId,
 
-        //     })
-        //     newFlim.save(function(err, newFlim) {
-        //         if (err) {
-        //             res.json({ success: false, msg: 'Failed to save' })
+            })
+            newFlim.save(function(err, newFlim) {
+                if (err) {
+                    res.json({ success: false, msg: 'Failed to save' })
 
-        //         } else {
-        //             res.json({ success: true, msg: newFlim._id })
-        //         }
-        //     })
-        // }
+                } else {
+                    res.json({ success: true, msg: newFlim._id })
+                }
+            })
+        }
     }
 }
 
