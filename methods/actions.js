@@ -88,10 +88,10 @@ var functions = {
     },
 
     fetchFlims: function(req, res) {
-        if (!req.body.userId) {
+        if (!req.param('userId')) {
             res.json({ success: false, msg: 'Enter all fields' })
         } else {
-            Flim.find({ userId: req.body.userId }).toArray(function(err, result) {
+            Flim.find({ userId: req.param('userId') }).toArray(function(err, result) {
                 if (err) {
                     res.json({ msg: 'Failed to fetch' })
 
