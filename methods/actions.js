@@ -92,24 +92,31 @@ var functions = {
 
     fetchFlims: function(req, res) {
 
-            if (!req.headers.userid) {
-                res.json({ success: false, msg: 'Enter userId' })
-            } else {
-                Flim.find({ userId: req.headers.userid }, function(err, flims) {
-                        if (err)
-                            throw err
+        if (!req.headers.userid) {
+            res.json({ success: false, msg: 'Enter userId' })
+        } else {
+            Flim.find({ userId: req.headers.userid }, null, {
+                    sort: {
+                        createdAt: -1
+                    }
+                }
 
-                        if (!flims) {
-                            res.json({ success: false, msg: 'No flims found for the user' })
-                        } else {
-                            //console.log(flims)
-                            res.json({ success: true, msg: flims })
-                        }
-                    })
-                    //res.json({ success: true, msg: req.headers.userid })
-            }
+                ,
+                function(err, flims) {
+                    if (err)
+                        throw err
+
+                    if (!flims) {
+                        res.json({ success: false, msg: 'No flims found for the user' })
+                    } else {
+
+                        res.json({ success: true, msg: flims })
+                    }
+                })
+
         }
-        // }
+    }
+
 }
 
 
