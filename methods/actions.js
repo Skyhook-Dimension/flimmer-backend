@@ -128,7 +128,7 @@ var functions = {
             sort: {
                 createdAt: -1
             },
-            limit: 2
+            limit: 10
         }
         ,
         function(err, flims) {
@@ -148,12 +148,12 @@ var functions = {
        else 
        {
  
-
-        Flim.find({ createdAt: {$gt: req.headers.id } }, null, {
+        
+        Flim.find({ _id: {$lt: req.headers.id } }, null, {
             sort: {
                 createdAt: -1
             },
-            limit: 2
+            limit: 10
         }
         ,
         function(err, flims) {
