@@ -1,5 +1,6 @@
 const express = require('express')
-const actions = require('../methods/actions')
+const useractions = require('../methods/useractions')
+const flimactions = require('../methods/flimactions')
 const router = express.Router()
 router.get('/', (req, res) => {
     res.send('Hello Chirag')
@@ -9,10 +10,10 @@ router.get('/dashboard', (req, res) => {
     res.send('Dashboard')
 })
 
-router.post('/adduser', actions.addNew)
-router.post('/addflim', actions.addFlim)
-router.post('/authenticate', actions.authenticate)
-router.get('/getinfo', actions.getinfo)
-router.get('/fetchflims', actions.fetchFlims)
+router.post('/adduser', useractions.addNew)
+router.post('/authenticate', useractions.authenticate)
+router.get('/getinfo', useractions.getinfo)
+router.get('/fetchflims', flimactions.fetchFlims)
+router.post('/addflim', flimactions.addFlim)
 
 module.exports = router
