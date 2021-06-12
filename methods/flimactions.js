@@ -56,6 +56,55 @@ var functions = {
                 })
 
         }
+    },
+
+    nextTen: function(req, res) {
+
+        if (req.headers.id == null) {
+
+
+            Flim.find(null, null, {
+                    sort: {
+                        createdAt: -1
+                    },
+                    limit: 10
+                },
+                function(err, flims) {
+                    if (err)
+                        throw err
+
+                    if (!flims) {
+                        res.json({ success: false, msg: 'No flims left' })
+                    } else {
+
+                        res.json({ success: true, msg: flims })
+                    }
+                });
+
+
+        } else {
+
+
+            Flim.find({ _id: { $lt: req.headers.id } }, null, {
+                    sort: {
+                        createdAt: -1
+                    },
+                    limit: 10
+                },
+                function(err, flims) {
+                    if (err)
+                        throw err
+
+                    if (!flims) {
+                        res.json({ success: false, msg: 'No flims left' })
+                    } else {
+
+                        res.json({ success: true, msg: flims })
+                    }
+                });
+        }
+
+
     }
 
 }
