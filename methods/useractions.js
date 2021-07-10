@@ -1,8 +1,10 @@
 var User = require('../models/user')
 var Flim = require('../models/flim')
 var jwt = require('jwt-simple')
+var jwt2 = require('jsonwebtoken')
 var config = require('../config/dbconfig')
 var mongoose = require('mongoose')
+const passport = require('passport');
 
 var functions = {
     addNew: function(req, res) {
@@ -37,6 +39,7 @@ var functions = {
             } else {
                 user.comparePassword(req.body.password, function(err, isMatch) {
                         if (isMatch && !err) {
+                            console.log('JSON')
                             var token = jwt.encode(user, config.secret)
                             res.json({ success: true, token: token })
 
@@ -48,6 +51,31 @@ var functions = {
 
             }
         })
+    },
+
+    login: function(req, res) {
+
+        passport.authenticate('local', { session: false }, (err, user, info) => {
+                console.log(err);
+                if (err || !user) {
+                    return res.status(400).json({
+                        message: info ? info.message : 'Login failed',
+                        user: user
+                    });
+                }
+
+                req.login(user, { session: false }, (err) => {
+                    if (err) {
+                        res.send(err);
+                    }
+
+                    const token = jwt2.sign(user, config.secret);
+
+                    return res.json({ user, token });
+                });
+            })
+            //(req, res);
+
     },
 
     getinfo: function(req, res) {
