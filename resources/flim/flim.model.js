@@ -6,6 +6,7 @@ const flimSchema = new Schema({
     moviePoster: String,
     movieYear: String,
     movieId: String,
+    imageUrl: String,
 
     flimBody: {
         type: String,
