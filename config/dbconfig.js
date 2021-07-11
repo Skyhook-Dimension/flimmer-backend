@@ -1,4 +1,6 @@
-module.exports = {
+const config = {
     secret: 'yoursecret',
     database: 'mongodb+srv://mathursahab:626398@cluster0.xzunx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 }
+
+export default config

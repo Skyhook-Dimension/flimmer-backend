@@ -9,11 +9,12 @@ const flimSchema = new Schema({
 
     flimBody: {
         type: String,
-        require: true
+        required: true
     },
-    userId: {
-        type: String,
-        require: true
+    createdBy: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'User',
+        required: true
     },
     likes: {
         type: Number,

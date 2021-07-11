@@ -1,11 +1,13 @@
-const mongoose = require('mongoose')
-const dbconfig = require('./dbconfig')
+//const mongoose = require('mongoose')
+import mongoose from 'mongoose'
+//const dbconfig = require('./dbconfig')
+import config from './dbconfig.js'
 const connectDB = async() => {
     try {
-        const conn = await mongoose.connect(dbconfig.database, {
+        const conn = await mongoose.connect(config.database, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            useFindAndModify: false
+            useCreateIndex: true
 
 
         })
@@ -16,4 +18,4 @@ const connectDB = async() => {
     }
 
 }
-module.exports = connectDB
+export default connectDB

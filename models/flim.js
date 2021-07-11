@@ -1,7 +1,7 @@
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose'
+const Schema = mongoose.Schema;
 
-var flimSchema = new Schema({
+const flimSchema = new Schema({
     movieTitle: String,
     moviePoster: String,
     movieYear: String,
@@ -24,4 +24,4 @@ var flimSchema = new Schema({
 }, { timestamps: true })
 
 
-module.exports = mongoose.model('Flim', flimSchema)
+export const Flim = mongoose.model('Flim', flimSchema)
