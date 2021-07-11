@@ -6,6 +6,7 @@ import connectDB from './config/db.js'
 import { signin, signup, protect } from './utils/auth.js'
 import flimRouter from './resources/flim/flim.router.js'
 import userRouter from './resources/user/user.router.js'
+import scriptRouter from './resources/script/script.router.js'
 
 const app = express()
 
