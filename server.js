@@ -14,7 +14,6 @@ if (process.env.NODE_ENV === `development`) {
     app.use(morgan('dev'))
 }
 
-
 app.disable('x-powered-by')
 app.use(cors())
 app.use(urlencoded({ extended: false }))
@@ -25,6 +24,8 @@ app.post('/signin', signin)
 
 app.use('/api', protect)
 app.use('/api/flim', flimRouter)
+app.use('/api/user', userRouter)
+app.use('/api/script', scriptRouter)
 
 const PORT = process.env.PORT || 3000
 

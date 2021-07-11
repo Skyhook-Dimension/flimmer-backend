@@ -2,31 +2,31 @@ import { crudControllers } from '../../utils/crud.js'
 import { Flim } from './flim.model.js'
 
 
-export const fetchAllFlimsFromId = function(req, res) {
+// export const fetchAllFlimsFromId = function(req, res) {
 
-    console.log("All Flims By Id")
+//     console.log("All Flims By Id")
 
 
-    Flim.find({ _id: { $lt: req.params.id } }, null, {
-            sort: {
-                createdAt: -1
-            },
-            limit: 10
-        },
-        function(err, flims) {
-            if (err)
-                throw err
+//     Flim.find({ _id: { $lt: req.params.id } }, null, {
+//             sort: {
+//                 createdAt: -1
+//             },
+//             limit: 10
+//         },
+//         function(err, flims) {
+//             if (err)
+//                 throw err
 
-            if (!flims) {
-                res.json({ success: false, msg: 'No flims left' })
-            } else {
+//             if (!flims) {
+//                 res.json({ success: false, msg: 'No flims left' })
+//             } else {
 
-                res.json({ success: true, msg: flims })
-            }
-        });
-}
+//                 res.json({ success: true, msg: flims })
+//             }
+//         });
+// }
 
-export const fetchAllFlims = function(req, res) {
+export const fetchFlims = function(req, res) {
 
     console.log("All Flims")
         //res.send({ message: 'Tatti' })
@@ -35,7 +35,8 @@ export const fetchAllFlims = function(req, res) {
             sort: {
                 createdAt: -1
             },
-            limit: 10
+            limit: 10,
+            skip: req.params.page * 10
         },
         function(err, flims) {
             if (err)

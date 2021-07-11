@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import controllers from './script.controllers.js'
+import controllers, { fetchScripts } from './script.controllers.js'
 
 const router = Router()
 
@@ -16,5 +16,7 @@ router
     .get(controllers.getOne)
     .put(controllers.updateOne)
     .delete(controllers.removeOne)
+
+router.get('/fetch/:page', fetchScripts)
 
 export default router

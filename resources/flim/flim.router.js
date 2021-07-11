@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import controllers, { fetchAllFlims, fetchAllFlimsFromId } from './flim.controllers.js'
+import controllers, { fetchFlims } from './flim.controllers.js'
 
 const router = Router()
 
@@ -19,8 +19,8 @@ router
     .delete(controllers.removeOne)
 
 
-router.route('/all').get(fetchAllFlims)
-router.route('/fetch/:id').get(fetchAllFlimsFromId)
+router.route('/fetch/:page').get(fetchFlims)
+
 
 
 export default router
