@@ -4,14 +4,6 @@ import controllers, { fetchAllFlims, fetchAllFlimsFromId } from './flim.controll
 const router = Router()
 
 
-router.route('/all').get(fetchAllFlims)
-    // /api/item/:id
-router
-    .route('/:id')
-    .get(controllers.getOne)
-    .put(controllers.updateOne)
-    .delete(controllers.removeOne)
-
 // /api/item
 router
     .route('/')
@@ -19,9 +11,16 @@ router
     .post(controllers.createOne)
 
 
+// /api/item/:id
+router
+    .route('/:id')
+    .get(controllers.getOne)
+    .put(controllers.updateOne)
+    .delete(controllers.removeOne)
 
+
+router.route('/all').get(fetchAllFlims)
 router.route('/fetch/:id').get(fetchAllFlimsFromId)
 
-//
 
 export default router
